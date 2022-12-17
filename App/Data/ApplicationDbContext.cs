@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Overseer.App.Data;
 public class ApplicationDbContext : IdentityDbContext {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) {
-    }
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder) {
         base.OnModelCreating(builder);
