@@ -2,10 +2,10 @@
 
 namespace Overseer.App.Data.Entities;
 
-public class Service {
+public class ServiceKind {
     public int Id { get; set; }
     [AllowNull]
-    public ServiceKind Kind { get; set; }
+    public string Name { get; set; }
     [AllowNull]
-    public Body Body { get; set; }
+    public List<Tax> Taxes { get; set; }
 }

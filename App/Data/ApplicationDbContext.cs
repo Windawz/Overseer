@@ -11,13 +11,15 @@ public class ApplicationDbContext : IdentityDbContext {
         : base(options) { }
 
     [AllowNull]
+    public DbSet<Tax> Taxes { get; set; }
+    [AllowNull]
+    public DbSet<ServiceKind> ServiceKinds { get; set; }
+    [AllowNull]
     public DbSet<Service> Services { get; set; }
     [AllowNull]
     public DbSet<Bank> Banks { get; set; }
     [AllowNull]
     public DbSet<Body> Bodies { get; set; }
-    [AllowNull]
-    public DbSet<Tax> Taxes { get; set; }
     [AllowNull]
     public DbSet<Debt> Debts { get; set; }
     [AllowNull]
@@ -32,5 +34,6 @@ public class ApplicationDbContext : IdentityDbContext {
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) {
         base.ConfigureConventions(configurationBuilder);
         configurationBuilder.Properties<DateOnly>().HaveConversion<DateOnlyConverter, DateOnlyComparer>();
+        configurationBuilder.Properties<decimal>().HavePrecision(18, 6);
     }
 }
