@@ -2,12 +2,12 @@
 
 namespace Overseer.App.Data.Entities.Auth;
 
-public class OverseerUser
+public class Account
 {
     public int Id { get; set; }
     [AllowNull]
     public string UserName { get; set; }
-    public OverseerUserKind Kind { get; set; }
+    public AccountKind Kind { get; set; }
     [AllowNull]
     public string Password { get; set; }
 }

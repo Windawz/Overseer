@@ -2,7 +2,7 @@
 
 namespace Overseer.App.Data.Entities.Auth;
 
-public enum OverseerUserKind {
+public enum AccountKind {
     Body = 0,
     Bank = 1,
     Taxer = 2,

@@ -2,8 +2,8 @@
 
 namespace Overseer.App.Data.Entities.Auth;
 
-public class OverseerSession {
+public class Session {
     public int Id { get; set; }
     [AllowNull]
-    public OverseerUser User { get; set; }
+    public Account User { get; set; }
 }
