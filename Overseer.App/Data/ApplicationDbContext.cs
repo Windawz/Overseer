@@ -11,9 +11,9 @@ public class ApplicationDbContext : DbContext {
         : base(options) { }
 
     [AllowNull]
-    public DbSet<User> Users { get; set; }
+    public DbSet<OverseerUser> Users { get; set; }
     [AllowNull]
-    public DbSet<Session> Sessions { get; set; }
+    public DbSet<OverseerSession> Sessions { get; set; }
     [AllowNull]
     public DbSet<Tax> Taxes { get; set; }
     [AllowNull]
@@ -38,7 +38,7 @@ public class ApplicationDbContext : DbContext {
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) {
         base.ConfigureConventions(configurationBuilder);
         configurationBuilder.Properties<DateOnly>().HaveConversion<DateOnlyConverter, DateOnlyComparer>();
-        configurationBuilder.Properties<UserKind>().HaveConversion<int>();
+        configurationBuilder.Properties<OverseerUserKind>().HaveConversion<int>();
         configurationBuilder.Properties<decimal>().HavePrecision(18, 6);
     }
 }
