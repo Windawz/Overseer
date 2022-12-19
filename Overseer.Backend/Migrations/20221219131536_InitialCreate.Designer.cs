@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Overseer.App.Data;
+using Overseer.Backend;
 
 #nullable disable
 
-namespace App.Data.Migrations
+namespace Overseer.Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221219121152_ReorganizeAndAddAuthEntities")]
-    partial class ReorganizeAndAddAuthEntities
+    [Migration("20221219131536_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace App.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Auth.Account", b =>
+            modelBuilder.Entity("Overseer.Data.Auth.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace App.Data.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Auth.Session", b =>
+            modelBuilder.Entity("Overseer.Data.Auth.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,7 @@ namespace App.Data.Migrations
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Bank", b =>
+            modelBuilder.Entity("Overseer.Data.Bank", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace App.Data.Migrations
                     b.ToTable("Banks");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Body", b =>
+            modelBuilder.Entity("Overseer.Data.Body", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,7 +101,7 @@ namespace App.Data.Migrations
                     b.ToTable("Bodies");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Debt", b =>
+            modelBuilder.Entity("Overseer.Data.Debt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace App.Data.Migrations
                     b.ToTable("Debts");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.RedemptionAttempt", b =>
+            modelBuilder.Entity("Overseer.Data.RedemptionAttempt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace App.Data.Migrations
                     b.ToTable("RedemptionAttempts");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.RedemptionConclusion", b =>
+            modelBuilder.Entity("Overseer.Data.RedemptionConclusion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -178,7 +178,7 @@ namespace App.Data.Migrations
                     b.ToTable("RedemptionConclusions");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Service", b =>
+            modelBuilder.Entity("Overseer.Data.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +201,7 @@ namespace App.Data.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.ServiceKind", b =>
+            modelBuilder.Entity("Overseer.Data.ServiceKind", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -218,7 +218,7 @@ namespace App.Data.Migrations
                     b.ToTable("ServiceKinds");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Tax", b =>
+            modelBuilder.Entity("Overseer.Data.Tax", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,9 +239,9 @@ namespace App.Data.Migrations
                     b.ToTable("Taxes");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Auth.Session", b =>
+            modelBuilder.Entity("Overseer.Data.Auth.Session", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.Auth.Account", "User")
+                    b.HasOne("Overseer.Data.Auth.Account", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,15 +250,15 @@ namespace App.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Debt", b =>
+            modelBuilder.Entity("Overseer.Data.Debt", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.Bank", "Bank")
+                    b.HasOne("Overseer.Data.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Overseer.App.Data.Entities.Body", "Body")
+                    b.HasOne("Overseer.Data.Body", "Body")
                         .WithMany()
                         .HasForeignKey("BodyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,9 +269,9 @@ namespace App.Data.Migrations
                     b.Navigation("Body");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.RedemptionAttempt", b =>
+            modelBuilder.Entity("Overseer.Data.RedemptionAttempt", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.Debt", "Debt")
+                    b.HasOne("Overseer.Data.Debt", "Debt")
                         .WithMany()
                         .HasForeignKey("DebtId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -280,9 +280,9 @@ namespace App.Data.Migrations
                     b.Navigation("Debt");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.RedemptionConclusion", b =>
+            modelBuilder.Entity("Overseer.Data.RedemptionConclusion", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.RedemptionAttempt", "RedemptionAttempt")
+                    b.HasOne("Overseer.Data.RedemptionAttempt", "RedemptionAttempt")
                         .WithMany()
                         .HasForeignKey("RedemptionAttemptId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -291,15 +291,15 @@ namespace App.Data.Migrations
                     b.Navigation("RedemptionAttempt");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Service", b =>
+            modelBuilder.Entity("Overseer.Data.Service", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.Body", "Body")
+                    b.HasOne("Overseer.Data.Body", "Body")
                         .WithMany("Services")
                         .HasForeignKey("BodyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Overseer.App.Data.Entities.ServiceKind", "Kind")
+                    b.HasOne("Overseer.Data.ServiceKind", "Kind")
                         .WithMany()
                         .HasForeignKey("KindId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -310,19 +310,19 @@ namespace App.Data.Migrations
                     b.Navigation("Kind");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Tax", b =>
+            modelBuilder.Entity("Overseer.Data.Tax", b =>
                 {
-                    b.HasOne("Overseer.App.Data.Entities.ServiceKind", null)
+                    b.HasOne("Overseer.Data.ServiceKind", null)
                         .WithMany("Taxes")
                         .HasForeignKey("ServiceKindId");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.Body", b =>
+            modelBuilder.Entity("Overseer.Data.Body", b =>
                 {
                     b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("Overseer.App.Data.Entities.ServiceKind", b =>
+            modelBuilder.Entity("Overseer.Data.ServiceKind", b =>
                 {
                     b.Navigation("Taxes");
                 });
