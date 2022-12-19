@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overseer.Data", "Overseer.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overseer.Backend", "Overseer.Backend\Overseer.Backend.csproj", "{4F29679E-7FDC-4454-9C41-3B4C66ACC9D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overseer.Cli", "Overseer.Cli\Overseer.Cli.csproj", "{4F2973A6-BBA3-406D-A221-4B0989C81AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4F29679E-7FDC-4454-9C41-3B4C66ACC9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F29679E-7FDC-4454-9C41-3B4C66ACC9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F29679E-7FDC-4454-9C41-3B4C66ACC9D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F2973A6-BBA3-406D-A221-4B0989C81AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F2973A6-BBA3-406D-A221-4B0989C81AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F2973A6-BBA3-406D-A221-4B0989C81AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F2973A6-BBA3-406D-A221-4B0989C81AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
