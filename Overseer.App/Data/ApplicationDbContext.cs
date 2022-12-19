@@ -3,12 +3,17 @@
 using Microsoft.EntityFrameworkCore;
 
 using Overseer.App.Data.Entities;
+using Overseer.App.Data.Entities.Auth;
 
 namespace Overseer.App.Data;
 public class ApplicationDbContext : DbContext {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
+    [AllowNull]
+    public DbSet<User> Users { get; set; }
+    [AllowNull]
+    public DbSet<Session> Sessions { get; set; }
     [AllowNull]
     public DbSet<Tax> Taxes { get; set; }
     [AllowNull]
@@ -33,6 +38,7 @@ public class ApplicationDbContext : DbContext {
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) {
         base.ConfigureConventions(configurationBuilder);
         configurationBuilder.Properties<DateOnly>().HaveConversion<DateOnlyConverter, DateOnlyComparer>();
+        configurationBuilder.Properties<UserKind>().HaveConversion<int>();
         configurationBuilder.Properties<decimal>().HavePrecision(18, 6);
     }
 }
