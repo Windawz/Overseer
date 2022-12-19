@@ -8,4 +8,7 @@ public class Body {
     public string Name { get; set; }
     [AllowNull]
     public List<Service> Services { get; set; }
+
+    public override string ToString() =>
+        $"Body {{ Id = {Id}, Name = {Name}, Services = {{ {string.Join(", ", Services)} }} }}";
 }

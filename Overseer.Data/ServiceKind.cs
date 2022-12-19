@@ -8,4 +8,7 @@ public class ServiceKind {
     public string Name { get; set; }
     [AllowNull]
     public List<Tax> Taxes { get; set; }
+
+    public override string ToString() =>
+        $"ServiceKind {{ Id = {Id}, Name = {Name}, Taxes = {{ {string.Join(", ", Taxes)} }} }}";
 }

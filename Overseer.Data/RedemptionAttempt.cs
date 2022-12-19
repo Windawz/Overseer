@@ -8,4 +8,7 @@ public class RedemptionAttempt {
     public Debt Debt { get; set; }
     public DateOnly AttemptDate { get; set; }
     public decimal StatedPayment { get; set; }
+
+    public override string ToString() =>
+        $"RedemptionAttempt {{ Id = {Id}, Debt = {Debt}, AttemptDate = {AttemptDate}, StatedPayment = {StatedPayment} }}";
 }

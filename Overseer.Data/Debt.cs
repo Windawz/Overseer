@@ -10,4 +10,7 @@ public class Debt {
     public Bank Bank { get; set; }
     public DateOnly DeadlineDate { get; set; }
     public decimal RawExpectedPayment { get; set; }
+
+    public override string ToString() =>
+        $"Debt {{ Id = {Id}, Body = {Body}, Bank = {Bank}, DeadlineDate = {DeadlineDate}, RawExpectedPayment = {RawExpectedPayment} }}";
 }
