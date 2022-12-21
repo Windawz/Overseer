@@ -7,9 +7,16 @@ public class Program {
     public static void Main() {
         Console.WriteLine(Configuration.WelcomeMessage);
 
+        var api = new Api();
         bool isRunning = true;
+        
+        var dialogue = MakeDialogue(api, () => {
+            isRunning = false;
+        });
+        
         while (isRunning) {
-
+            string input = Console.ReadLine()!;
+            dialogue.Execute(input);
         }
     }
 
@@ -30,6 +37,33 @@ public class Program {
                     foreach (var entity in entities) {
                         Console.WriteLine(entity.ToString());
                     }
+                });
+            })
+            .HasCommand("add", commandBuilder => {
+                commandBuilder.HasParameter("entity", parameterBuilder => {
+                    parameterBuilder.HasDescription("Name of the entity column to add a new instance to");
+                })
+                .HasParameter("entityArgs", parameterBuilder => {
+                    parameterBuilder.HasDescription("Arguments for the newly created entity instance")
+                        .HasValidation(arg => {
+                            return arg.StartsWith('(') && arg.EndsWith(')');
+                        });
+                })
+                .HasAction((dialogue, args) => {
+                    Type entityType = Type.GetType(args[0])!;
+
+                    var memberTypes = entityType.GetMembers()
+                        .Select(memberInfo => memberInfo.MemberType);
+                    Activator.CreateInstance()
+
+                    string entityArgsStr = args[1][1..^1];
+                    string[] entityArgs = entityArgsStr.Split(',',
+                        StringSplitOptions.RemoveEmptyEntries
+                        | StringSplitOptions.TrimEntries);
+
+
+
+                    dialogue.Api.Post();
                 });
             });
     }
